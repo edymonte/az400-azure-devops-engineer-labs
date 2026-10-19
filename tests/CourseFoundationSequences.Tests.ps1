@@ -56,6 +56,7 @@ BeforeAll {
     }
     function global:az {
         $line=$args -join ' ';$global:LASTEXITCODE=0
+        if($line -match '^version -o json'){return (@{'azure-cli'='2.0.0-offline-fixture'}|ConvertTo-Json)}
         if($line -match '^version '){return '2.0.0-offline-fixture'}
         if($line -match '^account show '){return (@{subscription=$global:FoundationFixture.subscription;tenant='fixture';cloud='AzureCloud'}|ConvertTo-Json)}
         if($line -match '^devops project list '){return '[]'}
