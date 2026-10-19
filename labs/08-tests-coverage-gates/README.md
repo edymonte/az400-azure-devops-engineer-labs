@@ -113,14 +113,14 @@ Expected state: The lock files resolve without implicit dependency changes.
 Positive validation:
 
 ```powershell
-$locks=Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse
+$locks=@(Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse)
  if ($locks.Count -lt 2) { throw 'Both API and test dependency locks are required.' }
 ```
 
 Negative validation:
 
 ```powershell
-$locks=Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse
+$locks=@(Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse)
  if (@($locks|Where-Object Length -eq 0).Count) { throw 'Empty dependency lock.' }
 ```
 

@@ -20,7 +20,7 @@
     {
       "id": "CP1",
       "title": "Inspect the local toolchain",
-      "commands": "$toolReport = [ordered]@{ powershell=$PSVersionTable.PSVersion.ToString(); git=(git --version); github=(gh --version | Select-Object -First 1); dotnet=(dotnet --version); azure=(az version --query '\"azure-cli\"' -o tsv) }\n $toolReport | ConvertTo-Json | Set-Content (Join-Path $WorkRoot 'tools.json')\n $toolReport\n",
+      "commands": "$toolReport = [ordered]@{ powershell=$PSVersionTable.PSVersion.ToString(); git=(git --version); github=(gh --version | Select-Object -First 1); dotnet=(dotnet --version); azure=((az version -o json | ConvertFrom-Json).'azure-cli') }\n $toolReport | ConvertTo-Json | Set-Content (Join-Path $WorkRoot 'tools.json')\n $toolReport\n",
       "expected": "PowerShell 7.4+, Git, GitHub CLI, Azure CLI, and .NET 10 are available.",
       "positive": "$t=Get-Content (Join-Path $WorkRoot 'tools.json') -Raw | ConvertFrom-Json\n if ([version]$t.powershell -lt [version]'7.4' -or $t.dotnet -notmatch '^10\\.') { throw 'Required PowerShell/.NET major versions missing.' }\n",
       "negative": "$t=Get-Content (Join-Path $WorkRoot 'tools.json') -Raw | ConvertFrom-Json\n if (@($t.git,$t.github,$t.azure) -contains '') { throw 'A required CLI reported no version.' }\n",
@@ -58,9 +58,9 @@
       "title": "Build and test the shared sample",
       "commands": "dotnet restore (Join-Path $RepoRoot 'samples/DevOps.slnx')\n dotnet build (Join-Path $RepoRoot 'samples/DevOps.slnx') --no-restore --configuration Release\n dotnet test (Join-Path $RepoRoot 'samples/DevOps.slnx') --no-build --configuration Release --logger \"trx;LogFileName=bootstrap.trx\" --results-directory (Join-Path $WorkRoot 'test-results')\n if ($LASTEXITCODE -ne 0) { throw 'Sample verification failed.' }\n",
       "expected": "The .NET 10 sample builds and its tests pass locally.",
-      "positive": "$trx=Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse\n if ($trx.Count -lt 1) { throw 'No test result was produced.' }\n",
+      "positive": "$trx=@(Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse)\n if ($trx.Count -lt 1) { throw 'No test result was produced.' }\n",
       "negative": "$xml=[xml](Get-Content (Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse|Select-Object -First 1).FullName -Raw)\n if ([int]$xml.TestRun.ResultSummary.Counters.failed -ne 0) { throw 'A sample test failed.' }\n",
-      "validate": "$trx=Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse\n if ($trx.Count -lt 1) { throw 'No test result was produced.' }\n\n$xml=[xml](Get-Content (Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse|Select-Object -First 1).FullName -Raw)\n if ([int]$xml.TestRun.ResultSummary.Counters.failed -ne 0) { throw 'A sample test failed.' }\n",
+      "validate": "$trx=@(Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse)\n if ($trx.Count -lt 1) { throw 'No test result was produced.' }\n\n$xml=[xml](Get-Content (Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse|Select-Object -First 1).FullName -Raw)\n if ([int]$xml.TestRun.ResultSummary.Counters.failed -ne 0) { throw 'A sample test failed.' }\n",
       "evidence": "TRX test summary and build exit code.",
       "fix": "Use the repository SDK version and restore packages before repeating the build.",
       "coverage": []

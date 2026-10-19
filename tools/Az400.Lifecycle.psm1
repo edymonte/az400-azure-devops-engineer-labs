@@ -99,7 +99,11 @@ function Get-LabRemoteObject {
 
 function Get-LabAdoProfileId {
     param([System.Collections.IDictionary]$Context)
-    $raw = Invoke-LabNative az @('devops', 'invoke', '--organization', $Context.adoOrganization, '--area', 'profile', '--resource', 'profiles', '--route-parameters', 'id=me', '--api-version', '7.1', '--http-method', 'GET', '--output', 'json')
+    # The profile area is served by the organization's identity host (vssps),
+    # not by the organization URL itself; asking dev.azure.com fails with
+    # "--area is not present in current organization".
+    $identityHost = $Context.adoOrganization -replace '^https://dev\.azure\.com/', 'https://vssps.dev.azure.com/' -replace '^https://([^./]+)\.visualstudio\.com', 'https://$1.vssps.visualstudio.com'
+    $raw = Invoke-LabNative az @('devops', 'invoke', '--organization', $identityHost, '--area', 'profile', '--resource', 'profiles', '--route-parameters', 'id=me', '--api-version', '7.1', '--http-method', 'GET', '--output', 'json')
     $adoProfile = $raw | ConvertFrom-Json -AsHashtable
     if (-not $adoProfile.ContainsKey('id') -or -not $adoProfile.id) { throw 'Azure DevOps profile identity cannot be established.' }
     return [string]$adoProfile.id
