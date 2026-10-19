@@ -103,7 +103,7 @@ Checkpoint: `CP1`
 Foundation/supporting task; no additional exam-objective coverage is claimed.
 
 ```powershell
-$toolReport = [ordered]@{ powershell=$PSVersionTable.PSVersion.ToString(); git=(git --version); github=(gh --version | Select-Object -First 1); dotnet=(dotnet --version); azure=(az version --query '"azure-cli"' -o tsv) }
+$toolReport = [ordered]@{ powershell=$PSVersionTable.PSVersion.ToString(); git=(git --version); github=(gh --version | Select-Object -First 1); dotnet=(dotnet --version); azure=((az version -o json | ConvertFrom-Json).'azure-cli') }
  $toolReport | ConvertTo-Json | Set-Content (Join-Path $WorkRoot 'tools.json')
  $toolReport
 ```
@@ -222,7 +222,7 @@ Expected state: The .NET 10 sample builds and its tests pass locally.
 Positive validation:
 
 ```powershell
-$trx=Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse
+$trx=@(Get-ChildItem (Join-Path $WorkRoot 'test-results') -Filter '*.trx' -Recurse)
  if ($trx.Count -lt 1) { throw 'No test result was produced.' }
 ```
 

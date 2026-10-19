@@ -25,9 +25,9 @@
       "title": "Restore locked sample dependencies",
       "commands": "dotnet restore (Join-Path $RepoRoot 'samples/DevOps.slnx') --locked-mode\n if ($LASTEXITCODE -ne 0) { throw 'Locked restore failed.' }\n Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse|Select-Object FullName\n",
       "expected": "The lock files resolve without implicit dependency changes.",
-      "positive": "$locks=Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse\n if ($locks.Count -lt 2) { throw 'Both API and test dependency locks are required.' }\n",
-      "negative": "$locks=Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse\n if (@($locks|Where-Object Length -eq 0).Count) { throw 'Empty dependency lock.' }\n",
-      "validate": "$locks=Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse\n if ($locks.Count -lt 2) { throw 'Both API and test dependency locks are required.' }\n\n$locks=Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse\n if (@($locks|Where-Object Length -eq 0).Count) { throw 'Empty dependency lock.' }\n",
+      "positive": "$locks=@(Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse)\n if ($locks.Count -lt 2) { throw 'Both API and test dependency locks are required.' }\n",
+      "negative": "$locks=@(Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse)\n if (@($locks|Where-Object Length -eq 0).Count) { throw 'Empty dependency lock.' }\n",
+      "validate": "$locks=@(Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse)\n if ($locks.Count -lt 2) { throw 'Both API and test dependency locks are required.' }\n\n$locks=@(Get-ChildItem (Join-Path $RepoRoot 'samples') -Filter packages.lock.json -Recurse)\n if (@($locks|Where-Object Length -eq 0).Count) { throw 'Empty dependency lock.' }\n",
       "evidence": "Lock hashes and restore result.",
       "fix": "Update lock files in a reviewed source change; never relax locked-mode silently.",
       "coverage": []
