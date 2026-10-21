@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "labId": "01",
+  "verifiedDate": "2026-10-21",
+  "note": "Evidence for each answer: the source page, an exact short phrase to highlight on it, and how it supports the correct option. 'principle' means the page states the rule and the answer applies judgment to the scenario.",
+  "items": {
+    "L01-Q001": {
+      "sourceId": "S1",
+      "highlight": "When you merge a linked pull request into the default branch",
+      "support": "direct",
+      "summary": "A supported closing keyword plus the issue reference (Fixes #42) links the pull request and closes the issue when it merges into the default branch. 'Related to' is not a keyword and AB# is Azure Boards syntax."
+    },
+    "L01-Q002": {
+      "sourceId": "S8",
+      "highlight": "Using AB#ID in a comment or in a pull request title doesn't create a link",
+      "support": "direct",
+      "summary": "AB# links are created from a commit message, pull request description or issue description, never from the pull request title or a comment."
+    },
+    "L01-Q003": {
+      "sourceId": "S3",
+      "highlight": "Create a pull request to ask collaborators for feedback on your changes",
+      "support": "direct",
+      "summary": "GitHub flow is branch-based: create a focused branch, open a pull request for review and checks, then merge into the default branch."
+    },
+    "L01-Q004": {
+      "sourceId": "S4",
+      "highlight": "You can customize notifications for a repository",
+      "support": "direct",
+      "summary": "Custom repository notifications let you subscribe only to selected event types instead of watching all activity."
+    },
+    "L01-Q005": {
+      "sourceId": "S6",
+      "highlight": "Use the mapping pane to link backlog items to portfolio backlog items",
+      "support": "principle",
+      "summary": "Azure Boards models decomposition with the Parent/Child hierarchy: the feature is the parent and each independently tracked task is a child."
+    },
+    "L01-Q006": {
+      "sourceId": "S5",
+      "highlight": "set the status to Done when an issue is closed",
+      "support": "direct",
+      "summary": "Projects ships a built-in workflow that sets Status to Done when an issue is closed; enable that workflow first."
+    },
+    "L01-Q007": {
+      "sourceId": "S8",
+      "highlight": "Adds a new feature, AB#123.",
+      "support": "direct",
+      "summary": "A bare AB# reference without a state keyword only links the work item; no state transition occurs."
+    },
+    "L01-Q008": {
+      "sourceId": "S1",
+      "highlight": "The syntax for closing keywords depends on whether the issue is in the same repository",
+      "support": "direct",
+      "summary": "For an issue in a different repository the closing reference must include owner and repository: Fixes org/platform#28."
+    },
+    "L01-Q009": {
+      "sourceId": "S11",
+      "highlight": "You can define different input types, validations, default assignees, and default labels",
+      "support": "direct",
+      "summary": "Issue forms collect structured input at creation time and can mark fields such as reproduction steps as required."
+    },
+    "L01-Q010": {
+      "sourceId": "S8",
+      "highlight": "Fixing multiple bugs: issue #123 and user story AB#234",
+      "support": "direct",
+      "summary": "#123 refers to a GitHub issue and AB#234 to an Azure Boards work item: separate namespaces, so the same number can identify unrelated work."
+    },
+    "L01-Q011": {
+      "sourceId": "S6",
+      "highlight": "You can use work item links to track dependencies and related work for traceability",
+      "support": "principle",
+      "summary": "Dependencies are recorded with work item links; Predecessor/Successor is the link type that expresses ordering (one item must finish before the other starts)."
+    },
+    "L01-Q012": {
+      "sourceId": "S1",
+      "highlight": "If the pull request targets any other branch, then these keywords are ignored",
+      "support": "direct",
+      "summary": "Closing keywords are honoured only for pull requests that target the default branch; merging into release/2 does not close the issue."
+    },
+    "L01-Q013": {
+      "sourceId": "S2",
+      "highlight": "To change the configuration or manage the Azure Boards app for GitHub",
+      "support": "direct",
+      "summary": "The Azure Boards app and connection only cover the repositories that were granted; review the app's repository access and the connection before anything else."
+    },
+    "L01-Q014": {
+      "sourceId": "S10",
+      "highlight": "you should validate the webhook signature before processing the delivery further",
+      "support": "direct",
+      "summary": "Compute the HMAC with the configured webhook secret and compare it with the X-Hub-Signature-256 header before trusting the payload."
+    },
+    "L01-Q015": {
+      "sourceId": "S6",
+      "highlight": "You can link work items to test cases using the Tested/Tested By link types",
+      "support": "direct",
+      "summary": "Requirement-to-verification traceability uses the Tested By link from the requirement to the test case."
+    },
+    "L01-Q016": {
+      "sourceId": "S8",
+      "highlight": "Fixes AB#123, Fixes AB#124, Fixes AB#125",
+      "support": "direct",
+      "summary": "With 'Fixes AB#123, AB#124' only the first item transitions; repeating the keyword before every reference transitions all of them."
+    },
+    "L01-Q017": {
+      "sourceId": "S7",
+      "highlight": "you can use the X-GitHub-Delivery header to ensure that each delivery is unique",
+      "support": "direct",
+      "summary": "Each delivery carries a unique X-GitHub-Delivery identifier; tracking it lets the receiver ignore repeats and stay idempotent."
+    },
+    "L01-Q018": {
+      "sourceId": "S5",
+      "highlight": "Projects includes built-in workflows that you can use to update the Status",
+      "support": "principle",
+      "summary": "Built-in workflows cover a documented set of events; confirm what is available and add an explicit handler for a reopen rule that is not offered."
+    },
+    "L01-Q019": {
+      "sourceId": "S6",
+      "highlight": "You can use work item links to track dependencies and related work for traceability",
+      "support": "principle",
+      "summary": "A dependency is its own link between the two items; it does not replace each item's correct Parent in its own hierarchy."
+    },
+    "L01-Q020": {
+      "sourceId": "S8",
+      "highlight": "you might see unexpected AB# mention linking",
+      "support": "direct",
+      "summary": "A repository connected to two Azure DevOps organizations makes AB# references ambiguous; connect it to projects in a single organization."
+    },
+    "L01-Q021": {
+      "sourceId": "S1",
+      "highlight": "You can link an issue to a pull request manually or using a supported keyword",
+      "support": "principle",
+      "summary": "Manual links and keyword links both appear in the Development sections; verify the relationship there instead of assuming a keyword effect."
+    },
+    "L01-Q022": {
+      "sourceId": "S11",
+      "highlight": "You can define different input types, validations, default assignees, and default labels",
+      "support": "principle",
+      "summary": "Forms enforce structure, not quality: add a prompt for a minimal reproducible example and a triage check for usable evidence."
+    },
+    "L01-Q023": {
+      "sourceId": "S8",
+      "highlight": "Removing the AB# reference from the description also removes it from the Development",
+      "support": "direct",
+      "summary": "Pull request Development links created by AB# exist only while the description keeps the reference."
+    },
+    "L01-Q024": {
+      "sourceId": "S7",
+      "highlight": "you may want to set up a queue to process webhook payloads asynchronously",
+      "support": "direct",
+      "summary": "Respond with 2XX within 10 seconds; enqueue the payload and do slow work in the background."
+    },
+    "L01-Q025": {
+      "sourceId": "S6",
+      "highlight": "Connects a work item to a branch, changeset, commit, pull request, tag, or versioned item",
+      "support": "principle",
+      "summary": "Typed links from stable work item IDs to code and test artifacts are what let an auditor navigate from requirement to implementation and verification."
+    },
+    "L01-Q026": {
+      "sourceId": "S3",
+      "highlight": "After you merge your pull request, delete your branch.",
+      "support": "direct",
+      "summary": "Delete the merged topic branch; the pull request and commit history are kept and the branch can be restored."
+    },
+    "L01-Q027": {
+      "sourceId": "S8",
+      "highlight": "If no such state exists in the current process, the system instead transitions",
+      "support": "direct",
+      "summary": "Fixes AB# moves the item to the first Resolved-category state, or to the first Completed-category state when the process has no Resolved state."
+    },
+    "L01-Q028": {
+      "sourceId": "S9",
+      "highlight": "you will need to know the ID of the options for single select fields",
+      "support": "direct",
+      "summary": "updateProjectV2ItemFieldValue needs the project item ID, the field ID and, for a single-select Status, the option ID."
+    },
+    "L01-Q029": {
+      "sourceId": "S4",
+      "highlight": "you can choose whether you want to receive notifications on GitHub or by email",
+      "support": "principle",
+      "summary": "Check personal routing first: participating/watching subscriptions and the delivery channel (web or email) decide where review requests land."
+    },
+    "L01-Q030": {
+      "sourceId": "S6",
+      "highlight": "Links describe the relationship between objects.",
+      "support": "principle",
+      "summary": "Keep one authoritative work item for the dependency and link the dependent items to it instead of copying its details."
+    },
+    "L01-Q031": {
+      "sourceId": "S8",
+      "highlight": "The linked-to GitHub repository must be connected to the Azure Boards project",
+      "support": "direct",
+      "summary": "Manual GitHub links are validated; the repository must be connected to the Azure Boards project or validation fails."
+    },
+    "L01-Q032": {
+      "sourceId": "S3",
+      "highlight": "Make a separate branch for each set of unrelated changes.",
+      "support": "direct",
+      "summary": "Separate branches for unrelated changes keep reviews focused and make reverting or delaying one change independent of the others."
+    },
+    "L01-Q033": {
+      "sourceId": "S7",
+      "highlight": "Your application should check the event type and action of a webhook payload",
+      "support": "direct",
+      "summary": "Dispatch on the X-GitHub-Event header and the action, and process only supported event types."
+    },
+    "L01-Q034": {
+      "sourceId": "S1",
+      "highlight": "When you merge a linked pull request into the default branch",
+      "support": "principle",
+      "summary": "A closing keyword closes the issue on merge, so the partial pull request must use a non-closing reference; only the completing change closes it."
+    },
+    "L01-Q035": {
+      "sourceId": "S6",
+      "highlight": "You can link work items to test cases using the Tested/Tested By link types",
+      "support": "principle",
+      "summary": "Work state must reflect verification: correct the state under the team workflow and link the failed test and the repair."
+    },
+    "L01-Q036": {
+      "sourceId": "S5",
+      "highlight": "Projects includes built-in workflows that you can use to update the Status",
+      "support": "principle",
+      "summary": "Built-in workflows react to fixed events; a multi-field rule with external approval needs a supported custom automation with explicit permissions and tests."
+    },
+    "L01-Q037": {
+      "sourceId": "S8",
+      "highlight": "When a pull request is created from a branch",
+      "support": "direct",
+      "summary": "Links are updated automatically from branch to pull request to merge commit; verify the work item's Development links before relying on them."
+    },
+    "L01-Q038": {
+      "sourceId": "S6",
+      "highlight": "You can link work items to test cases using the Tested/Tested By link types",
+      "support": "principle",
+      "summary": "When the requirement changes, record the revision and recheck whether the linked tests still verify the new criteria."
+    },
+    "L01-Q039": {
+      "sourceId": "S2",
+      "highlight": "Clear any repositories you don't want to connect.",
+      "support": "principle",
+      "summary": "Connections are scoped per repository: add only the approved repository and verify the existing integration keeps working."
+    },
+    "L01-Q040": {
+      "sourceId": "S7",
+      "highlight": "If your server goes down, you should redeliver missed webhooks",
+      "support": "principle",
+      "summary": "Acknowledge only after the event is durably stored; recover missed work by redelivery and idempotent retry."
+    },
+    "L01-Q041": {
+      "sourceId": "S8",
+      "highlight": "For example, AB#125 links to work item ID 125.",
+      "support": "principle",
+      "summary": "Work item IDs are unique inside an organization, so renumbering is never the fix; diagnose the repository connection and where the AB# reference is placed."
+    },
+    "L01-Q042": {
+      "sourceId": "S8",
+      "highlight": "Adds a new feature, AB#123.",
+      "support": "direct",
+      "summary": "'Fixes #18' closes the GitHub issue; a bare AB#913 only links the Boards item without changing its state."
+    },
+    "L01-Q043": {
+      "sourceId": "S7",
+      "highlight": "you can use the X-GitHub-Delivery header to ensure that each delivery is unique",
+      "support": "direct",
+      "summary": "Authenticate the delivery, deduplicate by delivery ID, and act on the item's current state rather than replaying old intent."
+    },
+    "L01-Q044": {
+      "sourceId": "S5",
+      "highlight": "Projects includes built-in workflows that you can use to update the Status",
+      "support": "principle",
+      "summary": "Built-in close-to-Done and a custom reopen handler are separate mechanisms; debug the custom handler's event, authorization and mutation on their own."
+    },
+    "L01-Q045": {
+      "sourceId": "S6",
+      "highlight": "Build, Found in build, Integrated in build",
+      "support": "principle",
+      "summary": "Link the actual build and deployed revision (Integrated in build) and verify the requirement against that artifact before claiming release."
+    },
+    "L01-Q046": {
+      "sourceId": "S6",
+      "highlight": "You can use work item links to track dependencies and related work for traceability",
+      "support": "principle",
+      "summary": "Compare reproduction steps and affected versions before marking a Duplicate; different evidence can mean distinct work."
+    },
+    "L01-Q047": {
+      "sourceId": "S3",
+      "highlight": "Make a separate branch for each set of unrelated changes.",
+      "support": "principle",
+      "summary": "Separate releasable changes where possible and trace each included requirement to its implementation and tests."
+    },
+    "L01-Q048": {
+      "sourceId": "S2",
+      "highlight": "Connect each GitHub repo to projects in a single Azure DevOps organization",
+      "support": "direct",
+      "summary": "After moving the repository, recheck the app installation and its original connection, keeping a single Azure DevOps organization."
+    },
+    "L01-Q049": {
+      "sourceId": "S7",
+      "highlight": "you can use the X-GitHub-Delivery header to ensure that each delivery is unique",
+      "support": "principle",
+      "summary": "Use a stable source identity, durable retry state, renewable least-privilege credentials and idempotent creation."
+    },
+    "L01-Q050": {
+      "sourceId": "S6",
+      "highlight": "Links describe the relationship between objects.",
+      "support": "principle",
+      "summary": "Publish a superseding decision linked to both test runs and configuration revisions, then reassess release eligibility."
+    }
+  }
+}

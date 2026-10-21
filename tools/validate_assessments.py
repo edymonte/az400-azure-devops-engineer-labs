@@ -103,6 +103,24 @@ def validate(root=ROOT, lab_ids=None):
             )), f"{qid}: legacy generic five-form question remains")
         require(difficulties == Counter(foundational=15, applied=25, advanced=10), f"{prefix}: difficulty quotas {dict(difficulties)}")
         totals.update(difficulties)
+        # Optional answer evidence: a short verbatim phrase from one of the
+        # question's own sources, shown to the learner only after grading.
+        evidence_path = path.parent / "evidence.json"
+        if evidence_path.exists():
+            evidence = read_data(evidence_path)
+            eprefix = str(evidence_path.relative_to(root))
+            require(evidence.get("schemaVersion") == 1 and evidence.get("labId") == lab_id, f"{eprefix}: schemaVersion/labId mismatch")
+            by_id = {q.get("id"): q for q in questions}
+            for qid, item in (evidence.get("items") or {}).items():
+                q = by_id.get(qid)
+                require(q is not None, f"{eprefix}: evidence for unknown question {qid}")
+                if q is None:
+                    continue
+                require(item.get("sourceId") in q.get("sourceIds", []), f"{eprefix}: {qid} evidence source is not one of the question's sources")
+                require(item.get("support") in {"direct", "principle"}, f"{eprefix}: {qid} support must be direct or principle")
+                highlight = item.get("highlight", "")
+                require(4 <= len(highlight.split()) <= 15, f"{eprefix}: {qid} highlight must be a short phrase (4-15 words)")
+                require(len(item.get("summary", "").split()) >= 8, f"{eprefix}: {qid} summary too short")
     inverted = defaultdict(list)
     for i, (qid, case_id, grams) in enumerate(near_candidates):
         shared = Counter(j for gram in grams for j in inverted[gram])
